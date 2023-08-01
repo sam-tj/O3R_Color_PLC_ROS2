@@ -35,7 +35,7 @@ jobs:
         run: |
           mkdir -p ~/ros2_ws/src/
           cp -a $GITHUB_WORKSPACE/. ~/ros2_ws/src/
-      - name: Install Dependencies
+      - name: Install ROS & Python Dependencies
         run: |
           source /opt/ros/${{ matrix.ROS_DISTRO }}/setup.bash
           sudo apt install python3-colcon-common-extensions
@@ -52,16 +52,16 @@ jobs:
           sudo apt-get install -y libssl-dev
           sudo apt-get install -y libcurl4-openssl-dev
           # sudo apt-get install -y libgoogle-glog-dev
-          sudo apt-get install -y libxmlrpc-c++8-dev 
-          sudo apt-get install -y libproj-dev 
+          sudo apt-get install -y libxmlrpc-c++8-dev
+          sudo apt-get install -y libproj-dev
           sudo apt-get install -y build-essential
-          sudo apt-get install -y coreutils 
-          sudo apt-get install -y cmake 
+          sudo apt-get install -y coreutils
+          sudo apt-get install -y cmake
           cd ~/
           ls
           mkdir -p ~/ifm3d && cd "$_"
           wget -cO - "https://github.com/ifm/ifm3d/releases/download/v1.3.3/ifm3d-ubuntu-22.04-amd64-debs_1.3.3.tar" > ifm3d.tar
-          ls 
+          ls
           tar -xvf ifm3d.tar
           sudo dpkg -R -i .
       - name: Download ifm3d ROS2 Wrapper
@@ -73,7 +73,9 @@ jobs:
       - name: Build Packages
         run: |
           source /opt/ros/${{ matrix.ROS_DISTRO }}/setup.bash
-          cd ~/ros2_ws/        
+          cd ~/ros2_ws/src
+          ls
+          cd ~/ros2_ws/
           rosdep update
-          rosdep install -y -r -q --from-paths src --ignore-src --rosdistro ${{ matrix.ROS_DISTRO }}    
+          rosdep install -y -r -q --from-paths src --ignore-src --rosdistro ${{ matrix.ROS_DISTRO }}
           colcon build --symlink-install

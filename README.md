@@ -57,18 +57,21 @@ Rest of the configuration is set to default as provided by ifm and also availabl
 	rosdep install -y -r -q --from-paths src --ignore-src --rosdistro humble
 	```
 
-3. Build ROS (2) package: o3r_ros2
+3. Build ROS (2) package: o3r_color_pcl_ros2 and source it
 
    ```bash
-   colcon build --packages-select o3r_ros2
+   colcon build --packages-select o3r_color_pcl_ros2
+   source install/setup.bash
    ```
 
-4. There are following launch files availble to test:
+4. There are following launch files available to test:
+   
+   Check the example launch files to modify as per requirements.
 
-|  Name | Description  | Command  |
-| ------------ | ------------ | ------------ |
-| example_o3r_2d_and_3d_launch  |  Example file to run 1 camera. | ros2 launch o3r_ros2 example_o3r_2d_and_3d_launch.py  |
-| example_two_o3r_heads_launch  |  Example file to run 2 cameras. |  ros2 launch o3r_ros2 example_two_o3r_heads_launch.py |
+|  Name | Description  | Command  | Cloud output topics  |
+| ------------ | ------------ | ------------ | ------------ |
+| example_o3r_2d_and_3d_launch  |  Example file to run 1 camera. | ros2 launch o3r_color_pcl_ros2 example_o3r_2d_and_3d_launch.py  | Cloud published on '/pcl/colored' |
+| example_two_o3r_heads_launch  |  Example file to run 2 cameras. |  ros2 launch o3r_color_pcl_ros2 example_two_o3r_heads_launch.py | Left cloud published on '/pcl/left_camera_cloud' *&* Right cloud published on '/pcl/right_camera_cloud'  |
 
 5. Use RVIZ2 to visualize TFs and robot model
 

@@ -17,21 +17,22 @@ import sys
 import rclpy
 from rclpy.executors import ExternalShutdownException
 from rclpy.node import Node
-from rclpy.time import Time
 from rclpy.duration import Duration
-from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSDurabilityPolicy
+from rclpy.time import Time
 from rcl_interfaces.msg import ParameterDescriptor
+from rclpy.qos import QoSDurabilityPolicy, QoSProfile, QoSReliabilityPolicy
 
-from sensor_msgs.msg import Image, CompressedImage
-from sensor_msgs.msg import PointCloud2
+from ifm3d_ros2.msg import Extrinsics, Intrinsics, RGBInfo
+
+from sensor_msgs.msg import CompressedImage, Image
 import sensor_msgs.msg as sensor_msgs
+from sensor_msgs.msg import PointCloud2
 
-from ifm3d_ros2.msg import RGBInfo, Extrinsics, Intrinsics
-
-import open3d as o3d
-import numpy as np
 
 from cv_bridge import CvBridge
+import numpy as np
+import open3d as o3d
+
 
 from scripts import transforms
 
@@ -149,7 +150,7 @@ class ColorPCLpub(Node):
         bridge = CvBridge()
 
         if self.__is_uncompressed is True:
-            jpg = bridge.imgmsg_to_cv2(self.__rgb_image_sub, "rgb8")
+            jpg = bridge.imgmsg_to_cv2(self.__rgb_image_sub, 'rgb8')
         elif self.__is_uncompressed is False:
             jpg = bridge.compressed_imgmsg_to_cv2(
                 self.__rgb_c_image_sub, 'rgb8')
@@ -209,7 +210,7 @@ class ColorPCLpub(Node):
         )
 
         # convert to points in optics space
-        # reverse internalTransRot
+        # reverse internal Transform Rotation
 
         r = np.array(
             [extrinsic2D.rot_x, extrinsic2D.rot_y, extrinsic2D.rot_z])

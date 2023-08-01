@@ -18,8 +18,8 @@ from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration
 from launch.conditions import IfCondition, UnlessCondition
+from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
 
 
@@ -45,7 +45,7 @@ def generate_launch_description():
             ),
             launch_arguments={
                 'camera_name': 'camera_2d',
-                'parameter_file_package': 'o3r_ros2',
+                'parameter_file_package': 'o3r_color_pcl_ros2',
                 'parameter_file_directory': 'config',
                 'parameter_file_name': 'o3r_2d.yaml',
             }.items()
@@ -56,13 +56,13 @@ def generate_launch_description():
             ),
             launch_arguments={
                 'camera_name': 'camera_3d',
-                'parameter_file_package': 'o3r_ros2',
+                'parameter_file_package': 'o3r_color_pcl_ros2',
                 'parameter_file_directory': 'config',
                 'parameter_file_name': 'o3r_3d.yaml',
             }.items()
         ),
         Node(
-            package='o3r_ros2',
+            package='o3r_color_pcl_ros2',
             executable='color_pcl_pub',
             name='color_pcl_pub_compressed',
             condition=UnlessCondition(LaunchConfiguration('uncompressed')),
@@ -86,7 +86,7 @@ def generate_launch_description():
                          'timer_period': timer_period}],
         ),
         Node(
-            package='o3r_ros2',
+            package='o3r_color_pcl_ros2',
             executable='color_pcl_pub',
             name='color_pcl_pub_uncompressed',
             condition=IfCondition(LaunchConfiguration('uncompressed')),

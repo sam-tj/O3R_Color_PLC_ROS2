@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>o3r_ros2</name>
+  <name>o3r_color_pcl_ros2</name>
   <version>0.1.0</version>
-  <description>O3R Examples</description>
+  <description>O3R Colored PCL</description>
   <maintainer email="sameer.tuteja05@gmail.com">Sameer Tuteja</maintainer>
   <license>Apache 2.0</license>
 

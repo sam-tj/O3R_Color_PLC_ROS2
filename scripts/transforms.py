@@ -83,13 +83,13 @@ def intrinsic_projection(intrinsicModelID, intrinsicModelParameters,
         theta = theta_s * p_radial
         theta = np.clip(
             theta, 0, np.pi
-        )  # -> avoid surprises at image corners of extreme fisheyes
+        )  # -> avoid surprises at image corners of extreme fisheye effect
         vx = np.choose((theta_s > 0), (0, (cx / theta_s) * np.sin(theta)))
         vy = np.choose((theta_s > 0), (0, (cy / theta_s) * np.sin(theta)))
         vz = np.cos(theta)
         return vx, vy, vz
     else:
-        raise RuntimeError("Unknown model %d" % intrinsicModelID)
+        raise RuntimeError('Unknown model %d' % intrinsicModelID)
 
 
 def rot_mat(r, order=(0, 1, 2)):
@@ -175,8 +175,8 @@ def inverse_intrinsic_projection(pcd, invIntrinsic2D, modelID2D):
         iy = iyd * fy - 0.5 + my
 
     else:
-        raise RuntimeError("Unknown intrinsic model ID %d" %
-                           invIntrinsic2D["modelID"])
+        raise RuntimeError('Unknown intrinsic model ID %d' %
+                           invIntrinsic2D['modelID'])
 
     return np.vstack([ix, iy])
 
@@ -214,7 +214,7 @@ def rectify(invIntrinsic, modelID, image):
         distorted_y = f_radial * vd
 
     else:
-        raise RuntimeError("wrong modelID2D")
+        raise RuntimeError('wrong modelID2D')
 
     # convert back to pixel coordinates for rectification
     ix = ((fx * (distorted_x + (alpha * distorted_y))) + mx) - 0.5
@@ -223,7 +223,7 @@ def rectify(invIntrinsic, modelID, image):
     im_rect = np.empty_like(image)
     if len(image.shape) == 2:
         im_rect = ndimage.map_coordinates(
-            image, [iy.ravel(), ix.ravel()], order=3, mode="constant", cval=0
+            image, [iy.ravel(), ix.ravel()], order=3, mode='constant', cval=0
         ).reshape(image.shape[:2])
     else:
         for i in range(image.shape[2]):
@@ -231,7 +231,7 @@ def rectify(invIntrinsic, modelID, image):
                 image[:, :, i],
                 [iy.ravel(), ix.ravel()],
                 order=3,
-                mode="constant",
+                mode='constant',
                 cval=0,
             ).reshape(image.shape[:2])
 
