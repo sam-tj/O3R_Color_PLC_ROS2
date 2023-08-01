@@ -31,10 +31,10 @@ jobs:
           sudo apt update
           sudo apt install ros-${{ matrix.ROS_DISTRO }}-desktop
           source /opt/ros/${{ matrix.ROS_DISTRO }}/setup.bash
-      - name: Create Workspace
+      - name: Create Workspace and copy repository in its folder.
         run: |
-          mkdir -p ~/ros2_ws/src/
-          cp -a $GITHUB_WORKSPACE/. ~/ros2_ws/src/
+          mkdir -p ~/ros2_ws/src/o3r_color_pcl_ros2/
+          cp -a $GITHUB_WORKSPACE/. ~/ros2_ws/src/o3r_color_pcl_ros2/
       - name: Install ROS & Python Dependencies
         run: |
           source /opt/ros/${{ matrix.ROS_DISTRO }}/setup.bash
