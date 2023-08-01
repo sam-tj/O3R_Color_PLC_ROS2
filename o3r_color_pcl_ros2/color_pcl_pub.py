@@ -15,24 +15,22 @@
 import sys
 
 import rclpy
-from rclpy.executors import ExternalShutdownException
-from rclpy.duration import Duration
 from rcl_interfaces.msg import ParameterDescriptor
+from rclpy.duration import Duration
+from rclpy.executors import ExternalShutdownException
 from rclpy.node import Node
-from rclpy.time import Time
 
 from ifm3d_ros2.msg import Extrinsics, Intrinsics, RGBInfo
 
+from rclpy.time import Time
 from rclpy.qos import QoSDurabilityPolicy, QoSProfile, QoSReliabilityPolicy
 
 import sensor_msgs.msg as sensor_msgs
+from cv_bridge import CvBridge
 from sensor_msgs.msg import CompressedImage, Image
 
-from cv_bridge import CvBridge
-
-from sensor_msgs.msg import PointCloud2
-
 import numpy as np
+from sensor_msgs.msg import PointCloud2
 import open3d as o3d
 
 from scripts import transforms
