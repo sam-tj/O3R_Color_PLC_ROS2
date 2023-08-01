@@ -13,7 +13,7 @@
   <build_depend>python3-scipy</build_depend>
   <build_depend>cv_bridge</build_depend>
   <build_depend>ifm3d_ros2</build_depend>
-  <build_depend>open3d</build_depend>
+  <build_depend>python-open3d-pip</build_depend>
   
   <exec_depend>rclpy</exec_depend>
   <exec_depend>sensor_msgs</exec_depend>
@@ -21,7 +21,7 @@
   <exec_depend>python3-scipy</exec_depend>
   <exec_depend>cv_bridge</exec_depend>
   <exec_depend>ifm3d_ros2</exec_depend>
-  <exec_depend>open3d</exec_depend>
+  <exec_depend>python-open3d-pip</exec_depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_copyright</test_depend>
